@@ -6,11 +6,11 @@ clc
 % 2. sorted flows
 
 % read txt file into matrix
-matrix_paths = dlmread('shortest_paths.txt');
+shortest_paths_matrix = dlmread('shortest_paths.txt');
 
 % extract information
-OD_matrix = [matrix_paths(:, 1:2)];
-Cost_values = matrix_paths(:, 3);
+OD_matrix = [shortest_paths_matrix(:, 1:2)];
+Cost_values = shortest_paths_matrix(:, 3);
 
 % get the number of rows
 numRows = size(OD_matrix,1);
@@ -32,6 +32,9 @@ end
 % sort flows in decreasing order
 sortedFlows = sortrows(flows, 2);  % in ascending order
 sortedFlows = flipud(sortedFlows);
+
+% save shortest paths matrix
+save('shortest_paths_matrix.mat', 'shortest_paths_matrix');
 
 % save all flows
 dlmwrite('generated_flow_all.txt', flows);
