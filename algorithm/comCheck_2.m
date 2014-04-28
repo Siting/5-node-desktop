@@ -5,6 +5,7 @@ global full_range
 origin_node = nodes_flow(1); 
 
 % initialize fuel range
+% only set full fuel range when there's a charging station at origin
 if any(ismember(origin_node, nodes_com))
     remain_fuel = full_range;
 else
