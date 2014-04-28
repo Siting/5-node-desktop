@@ -16,7 +16,7 @@ for i = 1 : numFlows  % loop through flows/paths
     round_links_flow = makeRoundTrip_link(links_flow);
     
     for j = 1 : numComs    % loop through combinations
-   
+        
         % get the nodes and links of the testing combination
         nodes_com = find(a_hp(j, 1: numNodes)==1);
         route_MatrixIndices_com = find(a_hp(j, numNodes+1:end)==1);
@@ -35,12 +35,13 @@ for i = 1 : numFlows  % loop through flows/paths
             end
             
             % check if any facility is located for flow
-            [checkResult] = comCheck_1(nodes_flow, links_flow, nodes_com, links_com);
+            [checkResult] = comCheck_1(round_nodes_flow, round_links_flow, nodes_com, links_com);
             
             if checkResult == 0 % no overlap
                 continue
             else
-                [checkResult_2] = comCheck_2(nodes_flow, links_flow, nodes_com, links_com, LINK);
+                
+                [checkResult_2] = comCheck_2(round_nodes_flow, round_links_flow, nodes_com, links_com, LINK);
                 
                 % update b_qh
                 % if a testing flow could be refueled by any selected

@@ -28,7 +28,7 @@ for i = 2 : length(nodes_flow)
         checkResult = 0;
         break
     else
-        if i == (length(nodes_flow)/2+1)  % node is destination
+        if i == (length(nodes_flow)/2+1)  % node is the round-trip destination
             if any(ismember(current_node,nodes_com)) || any(ismember(traveled_link, links_com))
                 % if a charging station is located at destination or the
                 % last link is assigned with charging pad, combination is
