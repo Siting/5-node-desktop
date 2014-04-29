@@ -1,6 +1,6 @@
 function[LINK] = loadLinks(linkMap)
 
-% load all links in a LINK structure
+% load all links in a LINK map
 
 LINK = containers.Map( ...
     'KeyType', 'int64', 'ValueType', 'any');

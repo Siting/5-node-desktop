@@ -7,8 +7,10 @@ numComs = size(b_qh, 2);       % num of combinations
 
 candidateRouteIDs = TOP_FLOWS.keys;
 
+%LINK_TEMP = buildLinkTemp(LINK);   % make a copy of LINK
+
 for i = 1 : numFlows  % loop through flows/paths
-    
+
     % get the nodes and links of the testing flow
     nodes_flow = ALL_FLOWS(i).nodes;
     links_flow = ALL_FLOWS(i).links;
@@ -16,6 +18,8 @@ for i = 1 : numFlows  % loop through flows/paths
     round_links_flow = makeRoundTrip_link(links_flow);
     
     for j = 1 : numComs    % loop through combinations
+
+        LINK_TEMP = buildLinkTemp(LINK); 
         
         % get the nodes and links of the testing combination
         nodes_com = find(a_hp(j, 1: numNodes)==1);
@@ -27,11 +31,16 @@ for i = 1 : numFlows  % loop through flows/paths
             routeID = routeIDs{r};
             links_com = TOP_FLOWS(routeID).links;
             
+            if i == 4 && j == 3
+                keyboard
+            end
+            
             % update fuel cost for links with charging pads to 0
             for k = 1 : length(links_com)
-                link = LINK(k);
+                linkID = links_com(k);
+                link = LINK_TEMP(linkID);
                 link.fuelCost = 0;
-                LINK(k) = link;
+                LINK_TEMP(linkID) = link;
             end
             
             % check if any facility is located for flow
@@ -40,8 +49,8 @@ for i = 1 : numFlows  % loop through flows/paths
             if checkResult == 0 % no overlap
                 continue
             else
-                
-                [checkResult_2] = comCheck_2(round_nodes_flow, round_links_flow, nodes_com, links_com, LINK);
+                              
+                [checkResult_2] = comCheck_2(round_nodes_flow, round_links_flow, nodes_com, links_com, LINK_TEMP);
                 
                 % update b_qh
                 % if a testing flow could be refueled by any selected
