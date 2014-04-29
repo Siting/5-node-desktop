@@ -55,7 +55,6 @@ flowIDs = [1:size(shortest_paths_matrix,1)];
 [b_qh, a_hp] = filterCombinations(b_qh, a_hp, ALL_FLOWS, TOP_FLOWS, numNodes, numRoutes, LINK);
 
 % save b_qh, a_hp into mat file
-save('b_qh', 'b_qh');
-save('a_hp', 'a_hp');
+save('
 
 
