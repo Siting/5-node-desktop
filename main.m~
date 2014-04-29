@@ -12,6 +12,8 @@ numRoutes = 2;       % number of candidate routes
 numStations = 1;     % number of stations to locate
 numPads = 1;         % number of pads(routes) to locate
 full_range = 5;      % set full capacity vehicle range (in mile)
+c_station = 2;       % cost for charging station
+c_pad = 5;           % cost for charging pad
 
 % load graph
 load([networkID, '-graph.mat']);
@@ -29,9 +31,13 @@ load('linkIDMatrix.mat');
 % matrix, each row: [O, D, cost, traveled nodes]
 load('shortest_paths_matrix.mat');
 
+% load unsorted flows
+% matrix, each row: [flowID, flow volume]
+load('generated_flows_all.mat');
+
 % load sorted flows
 % matrix, each row: [flowID, flow volume]
-load('generated_flow_sorted.mat');
+load('generated_flows_sorted.mat');
 topFlowIDs = sortedFlows(1:numRoutes, 1);   % retrive candidate route/flow IDs
 
 % retrieve top k flow info: nodes + links
@@ -54,7 +60,21 @@ flowIDs = [1:size(shortest_paths_matrix,1)];
 % filter out ineligible combinatinos
 [b_qh, a_hp] = filterCombinations(b_qh, a_hp, ALL_FLOWS, TOP_FLOWS, numNodes, numRoutes, LINK);
 
-% save b_qh, a_hp into mat file
-save('
+% compute refuled flow for each combination
+% map keys: combinationID
+% map structure: combinationID, refuled total flow, refueled flow ids
+% comMatrix, each row: [combinationID, cost, totalRefueledFlow]
+[COMBINATION, comMatrix] = generateCombinations(b_qh, a_hp, flows, numNodes, TOP_FLOWS);
+keyboard
+
+% sort combinations
+comIDs_sorted = sort(comMatrix,2);
+comIDs_sorted = flipud(comIDs_sorted);
+
+% save variables
+save('b_qh', 'b_qh');
+save('a_hp', 'a_hp');
+save('COMBINATION', 'COMBINATION');
+save('comIDs_sorted', 'comIDs_sorted');
 
 

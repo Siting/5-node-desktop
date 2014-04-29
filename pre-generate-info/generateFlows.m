@@ -42,5 +42,5 @@ save('generated_flows_all.mat', 'flows');
 
 % save sorted flows
 dlmwrite('generated_flow_sorted.txt', sortedFlows);
-save('generated_flow_sorted.mat', 'sortedFlows');
+save('generated_flows_sorted.mat', 'sortedFlows');
 

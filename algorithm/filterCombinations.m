@@ -31,10 +31,6 @@ for i = 1 : numFlows  % loop through flows/paths
             routeID = routeIDs{r};
             links_com = TOP_FLOWS(routeID).links;
             
-%             if i == 4 && j == 3
-%                 keyboard
-%             end
-            
             % update fuel cost for links with charging pads to 0
             for k = 1 : length(links_com)
                 linkID = links_com(k);
