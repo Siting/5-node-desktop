@@ -43,7 +43,7 @@ topFlowIDs = sortedFlows(1:numRoutes, 1);   % retrive candidate route/flow IDs
 % retrieve top k flow info: nodes + links
 % map keys: flowIDs
 % map structure TOP_FLOWS: flowID, origin, destination, cost, nodes, links
-topFlowIDs = [1;2];  % for testing
+%topFlowIDs = [1;2];  % for testing
 [TOP_FLOWS] = retriveFlows(topFlowIDs, shortest_paths_matrix, linkIDMatrix);
 
 % pre-generate b_qh, a_hp
