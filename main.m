@@ -72,12 +72,12 @@ comIDs_sorted = sort(comMatrix,2);
 comIDs_sorted = flipud(comIDs_sorted);
 
 % save variables
-save('b_qh', 'b_qh');
-dlmwrite('b_qh.txt', b_qh);
-save('a_hp', 'a_hp');
-dlmwrite('a_hp.txt', a_hp);
-save('COMBINATION', 'COMBINATION');
-save('comIDs_sorted', 'comIDs_sorted');
-dlmwrite('comIDs_sorted.txt', comIDs_sorted);
+save('./result/b_qh', 'b_qh');
+dlmwrite('./result/b_qh.txt', b_qh);
+save('./result/a_hp', 'a_hp');
+dlmwrite('./result/a_hp.txt', a_hp);
+save('./result/COMBINATION', 'COMBINATION');
+save('./result/comIDs_sorted', 'comIDs_sorted');
+dlmwrite('./result/comIDs_sorted.txt', comIDs_sorted);
 
 
