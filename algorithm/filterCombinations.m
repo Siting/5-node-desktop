@@ -18,7 +18,7 @@ for i = 1 : numFlows  % loop through flows/paths
     round_links_flow = makeRoundTrip_link(links_flow);
     
     for j = 1 : numComs    % loop through combinations
-        keyboard
+
         LINK_TEMP = buildLinkTemp(LINK);
         
         % get the nodes and links of the testing combination
@@ -33,7 +33,7 @@ for i = 1 : numFlows  % loop through flows/paths
             
         end
         links_com = unique(links_com);
-        keyboard
+
         % update fuel cost for links with charging pads to 0
         for k = 1 : length(links_com)
             linkID = links_com(k);

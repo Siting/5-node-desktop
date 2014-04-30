@@ -6,7 +6,7 @@ numODPairsTop = length(TOP_FLOWS);
 
 %% a_hp = 1 if a facility is assigned to potential location for combination
 % h
-
+keyboard
 % initialize all entries as 0
 numColumns_a = numNodes + numODPairsTop;
 if numStations == 0
@@ -42,12 +42,12 @@ else
     
     numRows_a = nchoosek(numNodes, numStations) * nchoosek(numODPairsTop, numPads);
     a_hp = zeros(numRows_a, numColumns_a); % pre-allocate space
-
+      
     % unit block for nodes
     % list out all combinations
-    nodeCombinationMatrix = zeros(nchoosek(numNodes, numStations),numNodes);
+    nodeCombinationMatrix = zeros(numRows_a,numNodes);
     indexCombinations_nodes = nchoosek(1:numNodes,numStations);
-    for i = 1 : size(indexCombinations_nodes,1)
+    for i = 1 : size(nodeCombinationMatrix,1)
         nodeCombinationMatrix(i,indexCombinations_nodes(i,:)) = 1;
     end
     
@@ -58,10 +58,12 @@ else
     routeCombinationMatrix = zeros(numRows_a, numODPairsTop);
     indexCombinations_routes = nchoosek(1:numODPairsTop,numPads);
     
-    indexCombinations_routes_replicated = kron(indexCombinations_routes,ones(nchoosek(numNodes, numStations),1));
-    for i = 1 : length(indexCombinations_routes_replicated)
-        routeCombinationMatrix(i, indexCombinations_routes_replicated(i,:)) = 1;
-    end
+    
+
+%     replicateRows = kron(indexCombinations_routes,ones(nchoosek(numNodes, numStations),1));
+%     for i = 1 : length(replicateRows)
+%         routeCombinationMatrix(i, replicateRows(i,:)) = 1;
+%     end
     
     % first time generate a_hp
     a_hp = [nodeCombinationMatrix routeCombinationMatrix];
