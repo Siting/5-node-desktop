@@ -74,7 +74,7 @@ end
 
 %% b_qh = 1 if combination h can refule path q\
 % for now, initialize all elements to 0
-numColumns_b = size(a_hp,2);
+numColumns_b = size(a_hp,1);
 numRows_b = numODPairsTotal;
 
 b_qh = zeros(numRows_b, numColumns_b);

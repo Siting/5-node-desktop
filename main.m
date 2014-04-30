@@ -9,8 +9,8 @@ global full_range
 networkID = '5Node-network';
 numNodes = 5;
 numRoutes = 3;       % number of candidate routes
-numStations = 2;     % number of stations to locate
-numPads = 0;         % number of pads(routes) to locate
+numStations = 0;     % number of stations to locate
+numPads = 2;         % number of pads(routes) to locate
 full_range = 5;      % set full capacity vehicle range (in mile)
 c_station = 2;       % cost for charging station
 c_pad = 5;           % cost for charging pad
@@ -43,13 +43,13 @@ topFlowIDs = sortedFlows(1:numRoutes, 1);   % retrive candidate route/flow IDs
 % retrieve top k flow info: nodes + links
 % map keys: flowIDs
 % map structure TOP_FLOWS: flowID, origin, destination, cost, nodes, links
-%topFlowIDs = [1;2];  % for testing
+topFlowIDs = [1;2;4];  % for testing
 [TOP_FLOWS] = retriveFlows(topFlowIDs, shortest_paths_matrix, linkIDMatrix);
 
 % pre-generate b_qh, a_hp
 [b_qh, a_hp] = pregenerateCoefficientMatrix(shortest_paths_matrix, TOP_FLOWS, numNodes,...
     numStations, numPads);
-keyboard
+
 % retrieve all flows info: nodes + links
 % map keys: flowIDs
 % map structure ALL_FLOWS: flowID, origin, destination, cost, nodes, links
